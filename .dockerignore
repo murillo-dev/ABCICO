@@ -5,4 +5,3 @@ vendor
 storage/*.key
 tests
 Dockerfile
-docker-entrypoint.sh
