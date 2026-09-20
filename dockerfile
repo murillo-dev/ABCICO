@@ -18,6 +18,8 @@ RUN apk add --no-cache --virtual .build-deps \
 # 2. Configurar Nginx
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
+COPY docker/supervisord.conf /etc/supervisord.conf
+
 # 3. Configurar PHP-FPM para escuchar en 0.0.0.0:9000
 RUN echo "listen = 0.0.0.0:9000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
