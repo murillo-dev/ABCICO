@@ -1,5 +1,9 @@
 # Usa la imagen base oficial de Render que ya trae Nginx y PHP-FPM
-FROM richarvey/nginx-php-fpm:3.1.3-php8.4
+FROM php:8.4-fpm-alpine
+
+# Instalar extensiones necesarias para Laravel
+RUN docker-php-ext-install pdo pdo_pgsql pgsql bcmath zip
+
 
 # Copia tu código de Laravel al directorio de trabajo estándar
 COPY . /var/www/html
