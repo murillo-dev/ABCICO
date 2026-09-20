@@ -1,26 +1,40 @@
-# Usa la imagen base oficial de Render que ya trae Nginx y PHP-FPM
 FROM php:8.4-fpm-alpine
 
-# Instalar extensiones necesarias para Laravel
-RUN docker-php-ext-install pdo pdo_pgsql pgsql bcmath zip
-
+# 1. Instalar dependencias del sistema y compilar extensiones PHP
+#    Todo en un solo RUN para que las libs de compilación se eliminen después
 RUN apk add --no-cache --virtual .build-deps \
-    postgresql-dev \
-    libzip-dev \
-    build-base \
+        postgresql-dev \
+        libzip-dev \
+        build-base \
+        autoconf \
+    && apk add --no-cache \
+        nginx \
+        supervisor \
+        libpq \
+        libzip \
     && docker-php-ext-install pdo pdo_pgsql pgsql bcmath zip \
     && apk del .build-deps
 
+# 2. Configurar Nginx
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 
-# Copia tu código de Laravel al directorio de trabajo estándar
+# 3. Configurar PHP-FPM para escuchar en 0.0.0.0:9000
+RUN echo "listen = 0.0.0.0:9000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
+
+# 4. Copiar el proyecto Laravel
 COPY . /var/www/html
-
-# Asegura que se instalen las dependencias de producción
 WORKDIR /var/www/html
+
+# 5. Instalar dependencias de producción de Composer
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Configuración para el contenedor
+# 6. Dar permisos a storage y bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
 EXPOSE 80
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["/start.sh"] # Este es el comando por defecto de la imagen richarvey
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
