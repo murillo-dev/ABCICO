@@ -6,7 +6,7 @@ COPY . /var/www/html
 
 # Asegura que se instalen las dependencias de producción
 WORKDIR /var/www/html
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction -v
 
 # Configuración para el contenedor
 EXPOSE 80
