@@ -27,6 +27,9 @@ RUN echo "listen = 0.0.0.0:9000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY . /var/www/html
 WORKDIR /var/www/html
 
+# 4.5 Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # 5. Instalar dependencias de producción de Composer
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
