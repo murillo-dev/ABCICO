@@ -1,5 +1,5 @@
 # Usa la imagen base oficial de Render que ya trae Nginx y PHP-FPM
-FROM richarvey/nginx-php-fpm:latest
+FROM richarvey/nginx-php-fpm:3.1.3-php8.4
 
 # Copia tu código de Laravel al directorio de trabajo estándar
 COPY . /var/www/html
