@@ -1,7 +1,15 @@
+# ---------- ETAPA 1: Build de assets con Node ----------
+FROM node:20-alpine AS assets
+WORKDIR /build
+COPY package.json package-lock.json* ./
+RUN npm ci --no-audit --no-fund
+COPY . .
+RUN npm run build
+
+# ---------- ETAPA 2: PHP ----------
 FROM php:8.4-fpm-alpine
 
-# 1. Instalar dependencias del sistema y compilar extensiones PHP
-#    Todo en un solo RUN para que las libs de compilación se eliminen después
+# 1. Instalar dependencias del sistema y extensiones PHP
 RUN apk add --no-cache --virtual .build-deps \
         postgresql-dev \
         libzip-dev \
@@ -15,25 +23,27 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-install pdo pdo_pgsql pgsql bcmath zip \
     && apk del .build-deps
 
-# 2. Configurar Nginx
+# 2. Configurar Nginx y Supervisor
 COPY docker/nginx.conf /etc/nginx/nginx.conf
-
 COPY docker/supervisord.conf /etc/supervisord.conf
 
-# 3. Configurar PHP-FPM para escuchar en 0.0.0.0:9000
+# 3. PHP-FPM en 0.0.0.0:9000
 RUN echo "listen = 0.0.0.0:9000" >> /usr/local/etc/php-fpm.d/zz-docker.conf
 
-# 4. Copiar el proyecto Laravel
+# 4. Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# 5. Copiar el proyecto Laravel
 COPY . /var/www/html
 WORKDIR /var/www/html
 
-# 4.5 Instalar Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# 6. Copiar los assets compilados desde la etapa 1 👇
+COPY --from=assets /build/public/build /var/www/html/public/build
 
-# 5. Instalar dependencias de producción de Composer
+# 7. Dependencias de producción
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# 6. Dar permisos a storage y bootstrap/cache
+# 8. Permisos
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 80
