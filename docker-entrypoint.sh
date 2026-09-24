@@ -9,6 +9,10 @@ mkdir -p /var/www/html/storage/app/public
 
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
+echo "Creating SQLite database..."
+touch /var/www/html/database/database.sqlite
+chown www-data:www-data /var/www/html/database/database.sqlite
+
 echo "Caching config..."
 php artisan config:cache
 
