@@ -20,11 +20,11 @@ Route::prefix('la-asociacion')->name('association.')->group(function () {
 
 Route::prefix('estatutos')->name('statutes.')->group(function () {
     Route::get('/', [StatutesController::class, 'index'])->name('index');
-    Route::get('/{statute:slug}', [StatutesController::class, 'show'])->name('show');
     Route::get('/denominacion', [StatutesController::class, 'denomination'])->name('denomination');
     Route::get('/objeto', [StatutesController::class, 'object'])->name('object');
     Route::get('/categoria-de-miembros', [StatutesController::class, 'categories'])->name('categories');
     Route::get('/directiva', [StatutesController::class, 'directiva'])->name('directiva');
+    Route::get('/{statute:slug}', [StatutesController::class, 'show'])->name('show');
 });
 
 Route::prefix('miembros')->name('members.')->group(function () {
