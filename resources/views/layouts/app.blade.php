@@ -152,6 +152,58 @@
                 const menu = document.getElementById('mobile-menu');
                 menu.classList.toggle('hidden');
             });
+
+            (function() {
+                const carousel = document.getElementById('hero-carousel');
+                if (!carousel) return;
+
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                const dots = carousel.querySelectorAll('.carousel-dot');
+                const prevBtn = document.getElementById('carousel-prev');
+                const nextBtn = document.getElementById('carousel-next');
+                let current = 0;
+                let timer;
+
+                function goTo(index) {
+                    current = (index + slides.length) % slides.length;
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('opacity-100', i === current);
+                        slide.classList.toggle('opacity-0', i !== current);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('bg-white', i === current);
+                        dot.classList.toggle('bg-white/40', i !== current);
+                        dot.classList.toggle('scale-125', i === current);
+                    });
+                }
+
+                function next() { goTo(current + 1); }
+                function prev() { goTo(current - 1); }
+
+                function startAuto() {
+                    timer = setInterval(next, 5000);
+                }
+
+                function resetAuto() {
+                    clearInterval(timer);
+                    startAuto();
+                }
+
+                nextBtn?.addEventListener('click', () => { next(); resetAuto(); });
+                prevBtn?.addEventListener('click', () => { prev(); resetAuto(); });
+
+                dots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        goTo(parseInt(dot.dataset.slide));
+                        resetAuto();
+                    });
+                });
+
+                carousel.addEventListener('mouseenter', () => clearInterval(timer));
+                carousel.addEventListener('mouseleave', startAuto);
+
+                startAuto();
+            })();
         </script>
     @endsection
 </body>

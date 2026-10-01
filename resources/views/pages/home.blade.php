@@ -8,38 +8,72 @@
         <p class="text-xl text-gray-600 max-w-3xl mx-auto">Asociación Boliviana de Cirugía de Columna</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+    <div class="relative rounded-2xl overflow-hidden shadow-xl mb-12" id="hero-carousel">
+        <div class="carousel-slides relative h-[420px] md:h-[480px]">
+            <div class="carousel-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100" data-slide="0">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&q=80" alt="Historia ABCICO" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1a5276]/90 via-[#1a5276]/60 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="max-w-7xl mx-auto px-8 w-full">
+                        <div class="max-w-lg text-white">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-3">Historia</h3>
+                            <p class="text-lg text-blue-100 mb-6">Conoce nuestro recorrido, tradición y los hitos que han consolidado a ABCICO como referente en cirugía de columna.</p>
+                            <a href="{{ route('association.history') }}" class="inline-block px-6 py-3 bg-white text-[#1a5276] font-semibold rounded-lg hover:bg-blue-50 transition-colors">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h3 class="text-lg font-semibold mb-2">Historia</h3>
-            <p class="text-gray-600 text-sm">Conoce nuestro recorrido y tradición.</p>
-            <a href="{{ route('association.history') }}" class="mt-3 inline-block text-[#1a5276] font-medium text-sm hover:underline">Leer más →</a>
+            <div class="carousel-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0" data-slide="1">
+                <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&q=80" alt="Junta Directiva" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1a5276]/90 via-[#1a5276]/60 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="max-w-7xl mx-auto px-8 w-full">
+                        <div class="max-w-lg text-white">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-3">Junta Directiva</h3>
+                            <p class="text-lg text-blue-100 mb-6">Conoce a los profesionales que dirigen nuestra asociación durante el período 2025-2027.</p>
+                            <a href="{{ route('association.board') }}" class="inline-block px-6 py-3 bg-white text-[#1a5276] font-semibold rounded-lg hover:bg-blue-50 transition-colors">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0" data-slide="2">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80" alt="Estatutos" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1a5276]/90 via-[#1a5276]/60 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="max-w-7xl mx-auto px-8 w-full">
+                        <div class="max-w-lg text-white">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-3">Estatutos</h3>
+                            <p class="text-lg text-blue-100 mb-6">Revisa nuestras normas, denominación, objeto, categorías de miembros y directiva.</p>
+                            <a href="{{ route('statutes.index') }}" class="inline-block px-6 py-3 bg-white text-[#1a5276] font-semibold rounded-lg hover:bg-blue-50 transition-colors">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0" data-slide="3">
+                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1600&q=80" alt="Miembros" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1a5276]/90 via-[#1a5276]/60 to-transparent"></div>
+                <div class="absolute inset-0 flex items-center">
+                    <div class="max-w-7xl mx-auto px-8 w-full">
+                        <div class="max-w-lg text-white">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-3">Miembros</h3>
+                            <p class="text-lg text-blue-100 mb-6">Conoce a nuestros miembros fundadores y activos que hacen posible esta asociación.</p>
+                            <a href="{{ route('members.index') }}" class="inline-block px-6 py-3 bg-white text-[#1a5276] font-semibold rounded-lg hover:bg-blue-50 transition-colors">Leer más →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Junta Directiva</h3>
-            <p class="text-gray-600 text-sm">Conoce a quienes nos dirigen 2025-2027.</p>
-            <a href="{{ route('association.board') }}" class="mt-3 inline-block text-[#1a5276] font-medium text-sm hover:underline">Leer más →</a>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Estatutos</h3>
-            <p class="text-gray-600 text-sm">Revisa nuestras normas y regulaciones.</p>
-            <a href="{{ route('statutes.index') }}" class="mt-3 inline-block text-[#1a5276] font-medium text-sm hover:underline">Leer más →</a>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                <svg class="w-6 h-6 text-[#1a5276]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/></svg>
-            </div>
-            <h3 class="text-lg font-semibold mb-2">Miembros</h3>
-            <p class="text-gray-600 text-sm">Conoce a nuestros miembros y fundadores.</p>
-            <a href="{{ route('members.index') }}" class="mt-3 inline-block text-[#1a5276] font-medium text-sm hover:underline">Leer más →</a>
+        <button type="button" id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/40 transition-colors" aria-label="Anterior">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button type="button" id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm text-white flex items-center justify-center hover:bg-white/40 transition-colors" aria-label="Siguiente">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </button>
+        <div class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2.5" id="carousel-dots">
+            <button type="button" class="carousel-dot w-3 h-3 rounded-full bg-white transition-all duration-300" data-slide="0" aria-label="Slide 1"></button>
+            <button type="button" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" data-slide="1" aria-label="Slide 2"></button>
+            <button type="button" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" data-slide="2" aria-label="Slide 3"></button>
+            <button type="button" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300" data-slide="3" aria-label="Slide 4"></button>
         </div>
     </div>
 
